@@ -1,7 +1,9 @@
 package xp.level.booster.activity
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import com.android.billingclient.api.*
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
@@ -11,6 +13,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import xp.level.booster.AppBaseActivity
 import xp.level.booster.R
 import xp.level.booster.adapters.ProductsAdapter
+import xp.level.booster.extensions.onClick
+import xp.level.booster.extensions.showFeedbackDialog
+import xp.level.booster.extensions.showRatingDialog
 import xp.level.booster.extensions.toast
 
 class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistoryResponseListener {
@@ -37,6 +42,19 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
 
         setContentView(R.layout.activity_main)
         unlockStatus.visibility = View.INVISIBLE
+        setupAppFunctions()
+    }
+
+
+
+    private fun setupAppFunctions() {
+        ratingDialog.onClick {
+            showRatingDialog()
+        }
+        feedBack.onClick {
+            showFeedbackDialog(this@MainActivity)
+
+        }
     }
 
     private fun setupBillingClient() {

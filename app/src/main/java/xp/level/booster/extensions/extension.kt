@@ -129,7 +129,6 @@ fun Activity.openLottieDialog(
 }
 
 
-@RequiresApi(Build.VERSION_CODES.KITKAT)
 fun Activity.showFeedbackDialog(activity: Activity) {
     val alertDialog: androidx.appcompat.app.AlertDialog
     val builder =
@@ -141,7 +140,7 @@ fun Activity.showFeedbackDialog(activity: Activity) {
     val btn_submit = view.findViewById<TextView>(R.id.btn_submit)
     val btn_cancel = view.findViewById<TextView>(R.id.btn_cancel)
     alertDialog = builder.create()
-    Objects.requireNonNull(alertDialog.window).attributes.windowAnimations =
+    Objects.requireNonNull(alertDialog.window)!!.attributes.windowAnimations =
         R.style.DialogAnimationTheme
     setPushDownAnimTo(btn_submit).setScale(MODE_SCALE, 0.89f)
         .setDurationPush(DEFAULT_PUSH_DURATION)
