@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">XP Level Booster</string>
+    <string name="font_semibold" translatable="false">fonts/Montserrat-SemiBold.ttf</string>
+    <string name="font_bold" translatable="false">fonts/Montserrat-Bold.ttf</string>
+    <string name="font_regular" translatable="false">fonts/Montserrat-Regular.ttf</string>
+    <string name="error_no_internet">Oops!! You Are Not Connected To Internet</string>
+    <string name="lbl_tap_to_retry">\"Network Error! Tap to retry.\"</string>
+    <string name="lbl_loading">Loading...</string>
+    <string name="feedback_mail">support@nightowldevelopers.com</string>
+    <string name="feedback">Feedback</string>
+    <string name="empty_feedback">Please Enter your Feedback</string>
+    <string name="feedback_hint">Tell us where we can improve?</string>
+    <string name="rate_experience">Rate Your Experience</string>
+    <string name="rate_msg">if you enjoy using app \n would you mind ratting us,then…?</string>
+    <string name="no_thanks">No, Thanks</string>
+    <string name="rating_error">Please select rate</string>
+    <string name="rate_your_experience">Rate Your Experience</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+
+</resources>
