@@ -12,69 +12,90 @@
 
         android:layout_width="350dp"
         android:layout_height="146dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@fonts/archivo_narrow_bold"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/archivo_narrow_bold"
         android:gravity="center"
-        android:text="Welcome !"
 
+        android:text="Welcome !"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/ratingLottie"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_marginTop="@dimen/_110sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="lottie/rating.json"
+        app:lottie_loop="true" />
 
     <TextView
         android:id="@+id/ratingDialog"
         style="@style/Heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="188dp"
-        android:fontFamily="@fonts/archivo_narrow_bold"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:fontFamily="@font/archivo_narrow_bold"
         android:gravity="center"
         android:text="Rating !"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.855"
+        app:layout_constraintEnd_toEndOf="@+id/ratingLottie"
+        app:layout_constraintStart_toStartOf="@+id/ratingLottie"
+        app:layout_constraintTop_toBottomOf="@+id/ratingLottie" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/feedackLottie"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_110sdp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="lottie/feedback.json"
+        app:lottie_loop="false" />
 
     <TextView
         android:id="@+id/feedBack"
         style="@style/Heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:fontFamily="@fonts/archivo_narrow_bold"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:fontFamily="@font/archivo_narrow_bold"
         android:gravity="center"
         android:text="Feedback !"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/feedackLottie"
+        app:layout_constraintStart_toStartOf="@+id/feedackLottie"
+        app:layout_constraintTop_toBottomOf="@+id/feedackLottie" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/landingPage"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:layout_marginBottom="4dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         app:lottie_autoPlay="true"
         app:lottie_fileName="lottie/7153-landing-page.json"
         app:lottie_loop="true" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/buttonTap"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:layout_constraintBottom_toBottomOf="@+id/products"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/products"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="lottie/15553-ui-finger-touch.json"
-        app:lottie_loop="true" />
+    <!--    <com.airbnb.lottie.LottieAnimationView-->
+    <!--        android:id="@+id/buttonTap"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="250dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@+id/products"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/products"-->
+    <!--        app:lottie_autoPlay="true"-->
+    <!--        app:lottie_fileName="lottie/15553-ui-finger-touch.json"-->
+    <!--        app:lottie_loop="true" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/products"
@@ -83,11 +104,12 @@
         android:scrollbars="vertical"
         android:visibility="visible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.554">
+        app:layout_constraintBottom_toBottomOf="@+id/landingPage"
+        app:layout_constraintEnd_toEndOf="@+id/successStar"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/successStar"
+        app:layout_constraintTop_toBottomOf="@+id/ratingLottie"
+        app:layout_constraintVertical_bias="0.341">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -95,11 +117,11 @@
         android:id="@+id/loader"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/products"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/products"
+        app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_fileName="lottie/15497-loader-ball-with-physical-interaction.json"
         app:lottie_loop="true" />
@@ -109,43 +131,90 @@
         style="@style/Heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:fontFamily="@font/archivo_narrow_bold"
         android:gravity="center"
         android:text="Trying to unlock ..."
         android:textSize="18sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonTap"
-        app:layout_constraintEnd_toStartOf="@+id/buttonTap"
-        app:layout_constraintStart_toEndOf="@+id/buttonTap"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeText"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/products"
+        app:layout_constraintEnd_toEndOf="@+id/products"
+        app:layout_constraintStart_toStartOf="@+id/products" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/trophy"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.189"
+        android:visibility="gone"
         app:lottie_autoPlay="true"
         app:lottie_fileName="lottie/whiteBG-trophy.json"
-        app:lottie_loop="true" />
+        app:lottie_loop="true"
+        tools:layout_editor_absoluteY="91dp" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/successStar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/landingPage"
+        app:layout_constraintBottom_toBottomOf="@+id/products"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/products"
         app:lottie_autoPlay="true"
         app:lottie_fileName="lottie/succes-Stars.json"
         app:lottie_loop="false" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/instagramLottie"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_40sdp"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="lottie/instagram.json"
+        app:lottie_loop="false" />
+
+    <TextView
+        android:id="@+id/instagramText"
+        style="@style/Heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:fontFamily="@font/archivo_narrow_bold"
+        android:gravity="center"
+        android:text="Follow &amp; Get XP!"
+        app:layout_constraintEnd_toEndOf="@+id/instagramLottie"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="@+id/instagramLottie"
+        app:layout_constraintTop_toBottomOf="@+id/instagramLottie" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/achievementLottie"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_40sdp"
+        android:padding="@dimen/_3sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="lottie/achievements.json"
+        app:lottie_loop="true" />
+
+    <TextView
+        android:id="@+id/achievementText"
+        style="@style/Heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:fontFamily="@font/archivo_narrow_bold"
+        android:gravity="center"
+        android:text="Achievements!"
+        app:layout_constraintEnd_toEndOf="@+id/achievementLottie"
+        app:layout_constraintStart_toStartOf="@+id/achievementLottie"
+        app:layout_constraintTop_toBottomOf="@+id/achievementLottie" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

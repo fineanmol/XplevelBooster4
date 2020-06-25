@@ -1,10 +1,11 @@
 package xp.level.booster.activity
 
-import android.os.Build
+import android.animation.Animator
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import androidx.annotation.RequiresApi
 import com.android.billingclient.api.*
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -40,9 +41,14 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
         super.onCreate(savedInstanceState)
         setupBillingClient()
 
+
         setContentView(R.layout.activity_main)
         unlockStatus.visibility = View.INVISIBLE
+
+        welcomeText.text = "Welcome " + Firebase.auth.currentUser!!.displayName
         setupAppFunctions()
+
+        unlockAchievements()
     }
 
 
@@ -218,98 +224,105 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
     }
 
 
-    /*override fun onPurchasesUpdated(responseCode: Int, purchases: MutableList<Purchase>?) {
-        println("onPurchasesUpdated: $responseCode")
-        allowMultiplePurchases(purchases)
+    private fun unlockAchievements() {
+        var googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this)
+        var username = Firebase.auth.currentUser!!.displayName
 
-        toast("onPurchasesUpdated:$responseCode")
-        if (responseCode == 0) {
-            //signIn()
-            loader.visibility = View.VISIBLE
-            unlockStatus.visibility = View.VISIBLE
-            buttonTap.addAnimatorListener(object :
-                Animator.AnimatorListener {
-                override fun onAnimationStart(animation: Animator) {
-                    Log.e("Animation:", "start")
-                }
+        loader.visibility = View.VISIBLE
+        unlockStatus.visibility = View.VISIBLE
+        landingPage.visibility = View.VISIBLE
+        achievementLottie.visibility = View.INVISIBLE
+        achievementText.visibility = View.INVISIBLE
+        instagramLottie.visibility = View.INVISIBLE
+        instagramText.visibility = View.INVISIBLE
+        /*buttonTap.addAnimatorListener(object :
+            Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {
+                Log.e("Animation:", "start")
+            }
 
-                override fun onAnimationEnd(animation: Animator) {
-                    Log.e("Animation:", "end")
-                    //Your code for remove the fragment
-                }
+            override fun onAnimationEnd(animation: Animator) {
+                Log.e("Animation:", "end")
+                //Your code for remove the fragment
+            }
 
-                override fun onAnimationCancel(animation: Animator) {
-                    Log.e("Animation:", "cancel")
-                }
+            override fun onAnimationCancel(animation: Animator) {
+                Log.e("Animation:", "cancel")
+            }
 
-                override fun onAnimationRepeat(animation: Animator) {
-                    Log.e("Animation:", "repeat")
-                    loader.visibility = View.VISIBLE
-                    products.visibility = View.INVISIBLE
-                    buttonTap.visibility = View.INVISIBLE
-                    buttonTap.removeAllAnimatorListeners()
-                }
-            })
-            trophy.visibility = View.VISIBLE
-            trophy.repeatCount = 10
-            trophy.playAnimation()
-            trophy.addAnimatorListener(object :
-                Animator.AnimatorListener {
-                var i = 1
-                override fun onAnimationStart(animation: Animator) {
-                    Log.e("Animation:", "start")
-                    unlockStatus.visibility = View.VISIBLE
-                    unlockStatus.text = "Unlocking achievemnet " + i
-                    i++
-                }
+            override fun onAnimationRepeat(animation: Animator) {
+                Log.e("Animation:", "repeat")
+                loader.visibility = View.VISIBLE
+                products.visibility = View.INVISIBLE
+                *//*buttonTap.visibility = View.INVISIBLE
+                buttonTap.removeAllAnimatorListeners()*//*
+            }
+        })*/
+        loader.visibility = View.VISIBLE
+        products.visibility = View.INVISIBLE
+        trophy.visibility = View.VISIBLE
+        trophy.repeatCount = 10
+        trophy.playAnimation()
+        trophy.addAnimatorListener(object :
+            Animator.AnimatorListener {
+            var i = 1
+            override fun onAnimationStart(animation: Animator) {
+                Log.e("Animation:", "start")
+                unlockStatus.visibility = View.VISIBLE
+                unlockStatus.text = "Unlocking achievemnet " + i
+                i++
+            }
 
-                override fun onAnimationEnd(animation: Animator) {
-                    Log.e("Animation:", "end")
-                    //Your code for remove the fragment
-                    trophy.visibility = View.INVISIBLE
-                    successStar.visibility = View.VISIBLE
-                    successStar.playAnimation()
-                }
+            override fun onAnimationEnd(animation: Animator) {
+                Log.e("Animation:", "end")
+                //Your code for remove the fragment
+                trophy.visibility = View.INVISIBLE
+                successStar.visibility = View.VISIBLE
+                successStar.playAnimation()
+            }
 
-                override fun onAnimationCancel(animation: Animator) {
-                    Log.e("Animation:", "cancel")
-                }
+            override fun onAnimationCancel(animation: Animator) {
+                Log.e("Animation:", "cancel")
+            }
 
-                override fun onAnimationRepeat(animation: Animator) {
-                    Log.e("Animation:", "repeat")
-                    unlockStatus.text = "Unlocking achievemnet " + i
-                    i++
-                }
-            })
-            successStar.addAnimatorListener(object :
-                Animator.AnimatorListener {
-                override fun onAnimationStart(animation: Animator) {
-                    Log.e("Animation:", "start")
-                    unlockStatus.text = "Hurray! All achievements unlocked!"
-                }
+            override fun onAnimationRepeat(animation: Animator) {
+                Log.e("Animation:", "repeat")
+                unlockStatus.text = "Unlocking achievemnet " + i
+                i++
+            }
+        })
+        successStar.addAnimatorListener(object :
+            Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {
+                Log.e("Animation:", "start")
+                unlockStatus.text = "Hurray! All achievements unlocked!"
+            }
 
-                override fun onAnimationEnd(animation: Animator) {
-                    Log.e("Animation:", "end")
-                    //Your code for remove the fragment
-                    products.visibility = View.VISIBLE
-                    buttonTap.visibility = View.VISIBLE
-                    loader.visibility = View.INVISIBLE
-                    unlockStatus.visibility = View.INVISIBLE
-                }
+            override fun onAnimationEnd(animation: Animator) {
+                Log.e("Animation:", "end")
+                //Your code for remove the fragment
+                products.visibility = View.VISIBLE
+//                buttonTap.visibility = View.VISIBLE
+                loader.visibility = View.INVISIBLE
+                unlockStatus.visibility = View.INVISIBLE
+                landingPage.visibility = View.INVISIBLE
+                achievementLottie.visibility = View.VISIBLE
+                achievementText.visibility = View.VISIBLE
+                instagramLottie.visibility = View.VISIBLE
+                instagramText.visibility = View.VISIBLE
+            }
 
-                override fun onAnimationCancel(animation: Animator) {
-                    Log.e("Animation:", "cancel")
-                }
+            override fun onAnimationCancel(animation: Animator) {
+                Log.e("Animation:", "cancel")
+            }
 
-                override fun onAnimationRepeat(animation: Animator) {
-                    Log.e("Animation:", "repeat")
-                }
-            })
+            override fun onAnimationRepeat(animation: Animator) {
+                Log.e("Animation:", "repeat")
+            }
+        })
 
-            println("Purchase Done!")
-        }
-
-    }*/
+        println("Purchase Done!")
+    }
 
 
     private fun signOut() {
