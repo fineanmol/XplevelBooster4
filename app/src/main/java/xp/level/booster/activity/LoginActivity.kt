@@ -11,6 +11,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.games.Games
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PlayGamesAuthProvider
 import com.google.firebase.auth.ktx.auth
@@ -20,6 +21,7 @@ import xp.level.booster.AppBaseActivity
 import xp.level.booster.R
 import xp.level.booster.extensions.launchActivity
 import xp.level.booster.extensions.onClick
+import xp.level.booster.extensions.snackBar
 
 class LoginActivity : AppBaseActivity() {
 
@@ -38,7 +40,7 @@ class LoginActivity : AppBaseActivity() {
         setContentView(R.layout.activity_login)
         auth = Firebase.auth
 
-
+        signIn()
         animation_view2.onClick {
             signIn()
         }
@@ -92,7 +94,8 @@ class LoginActivity : AppBaseActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("TAG", "signInWithCredential:success")
-                    var user = auth.currentUser
+                    val user = auth.currentUser
+                   // snackBar(user!!.displayName.toString(),Snackbar.LENGTH_LONG)
 
 //                    revokeAccess()
                     launchActivity<MainActivity>()

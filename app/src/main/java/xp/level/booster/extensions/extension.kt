@@ -28,6 +28,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.thekhaeng.pushdownanim.PushDownAnim
 import com.thekhaeng.pushdownanim.PushDownAnim.*
 import kotlinx.android.synthetic.main.dialog_no_internet.*
+import xp.level.booster.BuildConfig
 import xp.level.booster.R
 import xp.level.booster.XpLevelBoosterApp.Companion.getAppInstance
 import xp.level.booster.XpLevelBoosterApp.Companion.noInternetDialog
@@ -129,6 +130,7 @@ fun Activity.openLottieDialog(
 }
 
 
+@RequiresApi(Build.VERSION_CODES.KITKAT)
 fun Activity.showFeedbackDialog(activity: Activity) {
     val alertDialog: androidx.appcompat.app.AlertDialog
     val builder =
@@ -193,28 +195,29 @@ fun Activity.showRatingDialog() {
     alert_dialog.show()
 
     btn_submit.setOnClickListener { v: View? ->
-        if (rating_bar.rating >= 3) {
+        val appPackageName = BuildConfig.APPLICATION_ID
+        if (rating_bar.rating >= 5.0) {
             try {
                 startActivity(
                     Intent(
                         Intent.ACTION_VIEW,
-                        Uri.parse("market://details?id=\$appPackageName")
+                        Uri.parse("market://details?id=$appPackageName")
                     )
                 )
             } catch (anfe: ActivityNotFoundException) {
                 startActivity(
                     Intent(
                         Intent.ACTION_VIEW,
-                        Uri.parse("https://play.google.com/store/apps/details?id=\$appPackageName")
+                        Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
                     )
                 )
             }
             alert_dialog.dismiss()
         } else if (rating_bar.rating <= 0) {
             toast("" + getString(R.string.rating_error), Toast.LENGTH_SHORT)
-        } else if (rating_bar.rating < 3 && rating_bar.rating > 0) {
+        } else if (rating_bar.rating <= 4.99 && rating_bar.rating > 0.0) {
             alert_dialog.dismiss()
-            snackBar("${rating_bar.rating} star Submitted")
+            toast("Rate us 5 star to Unlock Achievements",Toast.LENGTH_SHORT)
         }
 
     }
