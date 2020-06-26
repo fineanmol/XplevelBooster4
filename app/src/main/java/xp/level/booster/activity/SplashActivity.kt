@@ -35,7 +35,7 @@ class SplashActivity : AppBaseActivity() {
 
 
 
-        runDelayed(2000) {
+        runDelayed(3000) {
             launchActivity<LoginActivity>()
             finish()
 

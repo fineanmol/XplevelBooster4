@@ -9,26 +9,24 @@
 
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:padding="@dimen/_10sdp"
         android:gravity="center"
+        android:layout_centerVertical="true"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="@dimen/_300sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_150sdp"
-            android:src="@drawable/ic_launcher" />
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:src="@drawable/levelup_logo" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animation_view"
             android:layout_width="300dp"
             android:layout_height="400dp"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:layout_marginBottom="@dimen/_40sdp"
+            android:paddingTop="@dimen/_40sdp"
             app:lottie_autoPlay="true"
             app:lottie_fileName="lottie/7655-rocket.json"
             app:lottie_loop="true" />
@@ -37,12 +35,7 @@
             android:id="@+id/animation_view2"
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:layout_marginTop="@dimen/_minus60sdp"
-            android:layout_marginBottom="@dimen/_100sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="@dimen/_minus60sdp"
             app:lottie_autoPlay="true"
             app:lottie_fileName="lottie/2160-get-started-button.json"
             app:lottie_loop="true" />

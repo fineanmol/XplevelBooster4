@@ -58,12 +58,13 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
         welcomeText.text = """Welcome ${Firebase.auth.currentUser!!.displayName}"""
 
         setupAppFunctions()
-     //   unlockAchievements()
+        unlockAchievements()
     }
 
 
 
 
+    @SuppressLint("NewApi")
     private fun setupAppFunctions() {
         ratingLottie.onClick {
 
