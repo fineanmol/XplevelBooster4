@@ -19,9 +19,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
 import xp.level.booster.AppBaseActivity
 import xp.level.booster.R
-import xp.level.booster.extensions.launchActivity
-import xp.level.booster.extensions.onClick
-import xp.level.booster.extensions.snackBar
+import xp.level.booster.extensions.*
 
 class LoginActivity : AppBaseActivity() {
 
@@ -40,14 +38,17 @@ class LoginActivity : AppBaseActivity() {
         setContentView(R.layout.activity_login)
         auth = Firebase.auth
 
-        signIn()
+        networkCheck()
+//        signIn()
         animation_view2.onClick {
+            networkCheck()
             signIn()
         }
 
     }
 
     private fun signIn() {
+        showProgress(true)
         googleSignInClient = gamesMakeGoogleSignInOptions()
 
         val signInIntent = googleSignInClient.signInIntent
@@ -74,6 +75,7 @@ class LoginActivity : AppBaseActivity() {
                 gamesClient.setViewForPopups(findViewById(android.R.id.content))
                 gamesClient.setGravityForPopups(Gravity.TOP or Gravity.CENTER_HORIZONTAL)
             } catch (e: ApiException) {
+                showProgress(false)
                 // Google Sign In failed, update UI appropriately
                 Log.w("TAG", "Google sign in failed", e)
                 // [START_EXCLUDE]
@@ -94,18 +96,13 @@ class LoginActivity : AppBaseActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("TAG", "signInWithCredential:success")
-                    val user = auth.currentUser
-                   // snackBar(user!!.displayName.toString(),Snackbar.LENGTH_LONG)
-
-//                    revokeAccess()
+                    showProgress(false)
                     launchActivity<MainActivity>()
                 } else {
                     // If sign in fails, display a message to the user.
+                    showProgress(false)
                     Log.w("TAG", "signInWithCredential:failure", task.exception)
-                    Toast.makeText(
-                        baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    snackBar("Authentication failed.")
                 }
 
                 // ...
@@ -122,21 +119,6 @@ class LoginActivity : AppBaseActivity() {
         return GoogleSignIn.getClient(this, gso)
     }
 
-    private fun gamesGetUserInfo() {
-
-        // [START games_get_user_info]
-        val user = auth.currentUser
-        user?.let {
-            val playerName = user.displayName
-
-            // The user's Id, unique to the Firebase project.
-            // Do NOT use this value to authenticate with your backend server, if you
-            // have one; use FirebaseUser.getIdToken() instead.
-            val uid = user.uid
-        }
-
-        // [END games_get_user_info]
-    }
 
     private fun signOut() {
         // Firebase sign out

@@ -5,6 +5,10 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import xp.level.booster.XpLevelBoosterApp.Companion.noInternetDialog
+import xp.level.booster.activity.LoginActivity
+import xp.level.booster.extensions.isNetworkAvailable
+import xp.level.booster.extensions.launchActivity
+import xp.level.booster.extensions.openLottieDialog
 import java.util.*
 
 
@@ -38,6 +42,15 @@ open class AppBaseActivity : AppCompatActivity() {
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+            }
+        }
+    }
+
+    fun networkCheck(){
+        if(!isNetworkAvailable())
+        {
+            openLottieDialog {
+                launchActivity<LoginActivity>()
             }
         }
     }
