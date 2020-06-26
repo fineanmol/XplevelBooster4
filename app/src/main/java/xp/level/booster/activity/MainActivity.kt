@@ -337,6 +337,7 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
                 buttonTap.removeAllAnimatorListeners()*//*
             }
         })*/
+
         loader.visibility = View.VISIBLE
         products.visibility = View.INVISIBLE
         trophy.visibility = View.VISIBLE
