@@ -1,12 +1,19 @@
 package xp.level.booster.activity
 
 import android.animation.Animator
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.android.billingclient.api.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.games.Games
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -54,13 +61,85 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
 
 
     private fun setupAppFunctions() {
-        ratingDialog.onClick {
+        ratingLottie.onClick {
             showRatingDialog()
         }
-        feedBack.onClick {
+        feedbackLottie.onClick {
             showFeedbackDialog(this@MainActivity)
 
         }
+        instagramLottie.onClick {
+            val uri = Uri.parse("http://instagram.com/nightowldevelopers")
+            val likeIng = Intent(Intent.ACTION_VIEW, uri)
+
+            likeIng.setPackage("com.instagram.android")
+
+            try {
+
+                startActivity(likeIng)
+                Toast.makeText(
+                    this@MainActivity,
+                    "Follow Us \n& Unlock your Achievement",
+                    Toast.LENGTH_LONG
+                ).show()
+                /*Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                    .unlock(getString(R.string.achievement_instagram_achievement))*/
+                Games.getLeaderboardsClient(this@MainActivity, GoogleSignIn.getLastSignedInAccount(this@MainActivity)!!)
+                    .submitScore(getString(R.string.leaderboard_leaderboard), 50000)
+                Handler().postDelayed(Runnable {
+                    // Do something after 5s = 5000ms
+                    /*val mPlayer =
+                        MediaPlayer.create(this@MainActivity, R.raw.ta_da_sound_click)
+                    mPlayer.start()*/
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Hurrah! Your Instagram Achievement is Unlocked !!",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }, 13000)
+            } catch (e: ActivityNotFoundException) {
+
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("http://instagram.com/nightowldevelopers")
+                    )
+                )
+                Toast.makeText(
+                    this@MainActivity,
+                    "Follow Us \n& Unlock your Achievement",
+                    Toast.LENGTH_LONG
+                ).show()
+//                Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+//                    .unlock(getString(R.string.achievement_instagram_achievement))
+                Games.getLeaderboardsClient(this@MainActivity, GoogleSignIn.getLastSignedInAccount(this@MainActivity)!!)
+                    .submitScore(getString(R.string.leaderboard_leaderboard), 200000)
+                Handler().postDelayed(Runnable {
+                    // Do something after 5s = 5000ms
+                    /*val mPlayer =
+                        MediaPlayer.create(this@MainActivity, R.raw.ta_da_sound_click)
+                    mPlayer.start()*/
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Hurrah! Your Instagram Achievement is Unlocked !!",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }, 13000)
+            }
+
+        }
+
+        achievementLottie.onClick {
+            showAchievements()
+        }
+
+    }
+
+    private fun showAchievements() {
+        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+            .achievementsIntent
+            .addOnSuccessListener { intent -> startActivityForResult(intent, RC_ACHIEVEMENT_UI) }
     }
 
     private fun setupBillingClient() {
@@ -261,7 +340,7 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
         loader.visibility = View.VISIBLE
         products.visibility = View.INVISIBLE
         trophy.visibility = View.VISIBLE
-        trophy.repeatCount = 10
+        trophy.repeatCount = 20
         trophy.playAnimation()
         trophy.addAnimatorListener(object :
             Animator.AnimatorListener {

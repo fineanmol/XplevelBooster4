@@ -60,8 +60,8 @@
     <color name="gray_80">#80ECECEC</color>
     <color name="color_selected">#79303F9F</color>
 
-    <color name="cyanColorPrimary">#009688</color>
-    <color name="cyanColorPrimaryDark">#009688</color>
+    <color name="cyanColorPrimary">#FC4253</color>
+    <color name="cyanColorPrimaryDark">#FC4253</color>
     <color name="bgColor">#F2F3F8</color>
 
     <array name="rainbow">

@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ratingLottie" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/feedackLottie"
+        android:id="@+id/feedbackLottie"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
         android:layout_marginStart="@dimen/_10sdp"
@@ -69,9 +69,9 @@
         android:fontFamily="@font/archivo_narrow_bold"
         android:gravity="center"
         android:text="Feedback !"
-        app:layout_constraintEnd_toEndOf="@+id/feedackLottie"
-        app:layout_constraintStart_toStartOf="@+id/feedackLottie"
-        app:layout_constraintTop_toBottomOf="@+id/feedackLottie" />
+        app:layout_constraintEnd_toEndOf="@+id/feedbackLottie"
+        app:layout_constraintStart_toStartOf="@+id/feedbackLottie"
+        app:layout_constraintTop_toBottomOf="@+id/feedbackLottie" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/landingPage"
