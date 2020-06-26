@@ -4,8 +4,8 @@
 
 
     <gradient
-        android:endColor="@color/cyanColorPrimary"
-        android:startColor="@color/cyanColorPrimaryDark" />
+        android:endColor="@color/yellow"
+        android:startColor="@color/yellow" />
 
 
     <corners

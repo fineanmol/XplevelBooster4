@@ -18,6 +18,7 @@
 
         <ImageView
             android:id="@+id/imageView"
+            android:layout_marginTop="@dimen/_40sdp"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
             android:src="@drawable/levelup_logo" />
@@ -26,7 +27,7 @@
             android:id="@+id/animation_view"
             android:layout_width="300dp"
             android:layout_height="400dp"
-            android:paddingTop="@dimen/_40sdp"
+            android:paddingTop="@dimen/_30sdp"
             app:lottie_autoPlay="true"
             app:lottie_fileName="lottie/7655-rocket.json"
             app:lottie_loop="true" />
@@ -34,8 +35,8 @@
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animation_view2"
             android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_marginBottom="@dimen/_minus60sdp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="@dimen/_minus1sdp"
             app:lottie_autoPlay="true"
             app:lottie_fileName="lottie/2160-get-started-button.json"
             app:lottie_loop="true" />
