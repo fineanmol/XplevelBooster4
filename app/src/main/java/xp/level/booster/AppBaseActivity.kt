@@ -3,7 +3,6 @@ package xp.level.booster
 import android.app.Dialog
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import xp.level.booster.XpLevelBoosterApp.Companion.noInternetDialog
 import xp.level.booster.activity.LoginActivity
 import xp.level.booster.extensions.isNetworkAvailable
@@ -12,7 +11,7 @@ import xp.level.booster.extensions.openLottieDialog
 import java.util.*
 
 
-open class AppBaseActivity : AppCompatActivity() {
+open class AppBaseActivity : FirebaseConfig() {
     private var progressDialog: Dialog? = null
     var language: Locale? = null
     private var themeApp: Int = 0
@@ -46,9 +45,8 @@ open class AppBaseActivity : AppCompatActivity() {
         }
     }
 
-    fun networkCheck(){
-        if(!isNetworkAvailable())
-        {
+    fun networkCheck() {
+        if (!isNetworkAvailable()) {
             openLottieDialog {
                 launchActivity<LoginActivity>()
             }

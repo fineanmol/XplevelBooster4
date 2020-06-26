@@ -22,6 +22,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import kotlinx.android.synthetic.main.activity_main.*
 import xp.level.booster.AppBaseActivity
 import xp.level.booster.R
@@ -35,6 +36,7 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
 
     // [START declare_auth]
     private lateinit var auth: FirebaseAuth
+
 
     // [END declare_auth]
     protected val RC_LEADERBOARD_UI = 9004
@@ -59,6 +61,7 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
         welcomeText.text = """Welcome ${Firebase.auth.currentUser!!.displayName}"""
 
         setupAppFunctions()
+
     }
 
 
