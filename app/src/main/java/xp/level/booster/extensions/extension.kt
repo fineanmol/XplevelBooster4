@@ -24,6 +24,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
 import androidx.annotation.StringRes
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.games.Games
 import com.google.android.material.snackbar.Snackbar
 import com.thekhaeng.pushdownanim.PushDownAnim
 import com.thekhaeng.pushdownanim.PushDownAnim.*
@@ -204,6 +206,8 @@ fun Activity.showRatingDialog() {
                         Uri.parse("market://details?id=$appPackageName")
                     )
                 )
+                Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!).unlock(getString(R.string.achievement_level_17))
+                Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!).unlock(getString(R.string.achievement_level_18))
             } catch (anfe: ActivityNotFoundException) {
                 startActivity(
                     Intent(
@@ -211,16 +215,20 @@ fun Activity.showRatingDialog() {
                         Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
                     )
                 )
+                Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!).unlock(getString(R.string.achievement_level_17))
+                Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!).unlock(getString(R.string.achievement_level_18))
             }
             alert_dialog.dismiss()
         } else if (rating_bar.rating <= 0) {
             toast("" + getString(R.string.rating_error), Toast.LENGTH_SHORT)
         } else if (rating_bar.rating <= 4.99 && rating_bar.rating > 0.0) {
             alert_dialog.dismiss()
-            toast("Rate us 5 star to Unlock Achievements",Toast.LENGTH_SHORT)
+            toast("Rate us 5 star to Unlock Achievements", Toast.LENGTH_SHORT)
         }
+
 
     }
     tv_no.setOnClickListener { v: View? -> alert_dialog.dismiss() }
+
 
 }

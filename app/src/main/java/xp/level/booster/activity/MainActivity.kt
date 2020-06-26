@@ -4,25 +4,19 @@ import android.animation.Animator
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.media.MediaPlayer
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
-import android.widget.RatingBar
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import com.android.billingclient.api.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.games.Games
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import kotlinx.android.synthetic.main.activity_main.*
 import xp.level.booster.AppBaseActivity
 import xp.level.booster.R
@@ -65,13 +59,24 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
     }
 
 
-
-
     @SuppressLint("NewApi")
     private fun setupAppFunctions() {
         ratingLottie.onClick {
             networkCheck()
             showRatingDialog()
+
+
+            Games.getAchievementsClient(
+                this@MainActivity,
+                GoogleSignIn.getLastSignedInAccount(this@MainActivity)!!
+            )
+                .unlock(getString(R.string.achievement_level_17))
+            Games.getAchievementsClient(
+                this@MainActivity,
+                GoogleSignIn.getLastSignedInAccount(this@MainActivity)!!
+            )
+                .unlock(getString(R.string.achievement_level_18))
+
         }
         feedbackLottie.onClick {
             networkCheck()
@@ -88,23 +93,31 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
             try {
 
                 startActivity(likeIng)
-                Toast.makeText(
+                toast("Follow Us \n" + "& Unlock your Achievement", Toast.LENGTH_LONG)
+
+                Games.getAchievementsClient(
                     this@MainActivity,
-                    "Follow Us \n& Unlock your Achievement",
-                    Toast.LENGTH_LONG
-                ).show()
-                Games.getAchievementsClient(this@MainActivity, GoogleSignIn.getLastSignedInAccount(this@MainActivity)!!)
+                    GoogleSignIn.getLastSignedInAccount(this@MainActivity)!!
+                )
+                    .unlock(getString(R.string.achievement_level_19))
+                Games.getAchievementsClient(
+                    this@MainActivity,
+                    GoogleSignIn.getLastSignedInAccount(this@MainActivity)!!
+                )
                     .unlock(getString(R.string.achievement_level_20))
-                Games.getLeaderboardsClient(this@MainActivity, GoogleSignIn.getLastSignedInAccount(this@MainActivity)!!)
+                Games.getLeaderboardsClient(
+                    this@MainActivity,
+                    GoogleSignIn.getLastSignedInAccount(this@MainActivity)!!
+                )
                     .submitScore(getString(R.string.leaderboard_leaderboard), 50000)
                 Handler().postDelayed(Runnable {
                     // Do something after 5s = 5000ms
                     /*val mPlayer =
                         MediaPlayer.create(this@MainActivity, R.raw.ta_da_sound_click)
                     mPlayer.start()*/
-                    toast("Hurrah! Your Instagram Achievement is Unlocked !!",Toast.LENGTH_SHORT)
+                    toast("Hurrah! Your Instagram Achievement is Unlocked !!", Toast.LENGTH_LONG)
 
-                }, 13000)
+                }, 11000)
             } catch (e: ActivityNotFoundException) {
 
                 startActivity(
@@ -120,19 +133,19 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
                 ).show()
 //                Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
 //                    .unlock(getString(R.string.achievement_instagram_achievement))
-                Games.getLeaderboardsClient(this@MainActivity, GoogleSignIn.getLastSignedInAccount(this@MainActivity)!!)
+                Games.getLeaderboardsClient(
+                    this@MainActivity,
+                    GoogleSignIn.getLastSignedInAccount(this@MainActivity)!!
+                )
                     .submitScore(getString(R.string.leaderboard_leaderboard), 200000)
                 Handler().postDelayed(Runnable {
                     // Do something after 5s = 5000ms
                     /*val mPlayer =
                         MediaPlayer.create(this@MainActivity, R.raw.ta_da_sound_click)
                     mPlayer.start()*/
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Hurrah! Your Instagram Achievement is Unlocked !!",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }, 13000)
+                    toast("Hurrah! Your Instagram Achievement is Unlocked !!", Toast.LENGTH_LONG)
+
+                }, 11000)
             }
 
         }
@@ -469,8 +482,8 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
 
     override fun onBackPressed() {
         //revokeAccess()
-        finish()
-        super.onBackPressed()
+        finishAffinity()
+        //  super.onBackPressed()
 
     }
 
