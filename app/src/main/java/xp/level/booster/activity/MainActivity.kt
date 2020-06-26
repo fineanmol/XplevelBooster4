@@ -1,19 +1,24 @@
 package xp.level.booster.activity
 
 import android.animation.Animator
+import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.widget.RatingBar
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.android.billingclient.api.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.games.Games
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -21,10 +26,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import xp.level.booster.AppBaseActivity
 import xp.level.booster.R
 import xp.level.booster.adapters.ProductsAdapter
-import xp.level.booster.extensions.onClick
-import xp.level.booster.extensions.showFeedbackDialog
-import xp.level.booster.extensions.showRatingDialog
-import xp.level.booster.extensions.toast
+import xp.level.booster.extensions.*
 
 class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistoryResponseListener {
 
@@ -44,24 +46,27 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
 
     private lateinit var googleSignInClient: GoogleSignInClient
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupBillingClient()
-
-
         setContentView(R.layout.activity_main)
         unlockStatus.visibility = View.INVISIBLE
 
-        welcomeText.text = "Welcome " + Firebase.auth.currentUser!!.displayName
-        setupAppFunctions()
 
-        unlockAchievements()
+
+        welcomeText.text = """Welcome ${Firebase.auth.currentUser!!.displayName}"""
+
+        setupAppFunctions()
+     //   unlockAchievements()
     }
+
 
 
 
     private fun setupAppFunctions() {
         ratingLottie.onClick {
+
             showRatingDialog()
         }
         feedbackLottie.onClick {
@@ -82,8 +87,8 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
                     "Follow Us \n& Unlock your Achievement",
                     Toast.LENGTH_LONG
                 ).show()
-                /*Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
-                    .unlock(getString(R.string.achievement_instagram_achievement))*/
+                Games.getAchievementsClient(this@MainActivity, GoogleSignIn.getLastSignedInAccount(this@MainActivity)!!)
+                    .unlock(getString(R.string.achievement_level_20))
                 Games.getLeaderboardsClient(this@MainActivity, GoogleSignIn.getLastSignedInAccount(this@MainActivity)!!)
                     .submitScore(getString(R.string.leaderboard_leaderboard), 50000)
                 Handler().postDelayed(Runnable {
@@ -91,12 +96,8 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
                     /*val mPlayer =
                         MediaPlayer.create(this@MainActivity, R.raw.ta_da_sound_click)
                     mPlayer.start()*/
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Hurrah! Your Instagram Achievement is Unlocked !!",
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
+                    toast("Hurrah! Your Instagram Achievement is Unlocked !!",Toast.LENGTH_SHORT)
+
                 }, 13000)
             } catch (e: ActivityNotFoundException) {
 
@@ -228,6 +229,7 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
             }
             else -> {
                 toast("Item not found or Google play billing error...")
+
             }
         }
     }
@@ -242,6 +244,61 @@ class MainActivity : AppBaseActivity(), PurchasesUpdatedListener, PurchaseHistor
                     if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                         val debugMessage = billingResult.debugMessage
                         toast("Item Purchased")
+
+                        /** Achievements Unlocking*/
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_1))
+                        Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .submitScore(getString(R.string.leaderboard_leaderboard), 10000)
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_2))
+                        Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .submitScore(getString(R.string.leaderboard_leaderboard), 20000)
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_3))
+                        Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .submitScore(getString(R.string.leaderboard_leaderboard), 30000)
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_4))
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_5))
+                        Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .submitScore(getString(R.string.leaderboard_leaderboard), 40000)
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_6))
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_7))
+                        Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .submitScore(getString(R.string.leaderboard_leaderboard), 60000)
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_8))
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_10))
+                        Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .submitScore(getString(R.string.leaderboard_leaderboard), 100000)
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_11))
+                        Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .submitScore(getString(R.string.leaderboard_leaderboard), 110000)
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_12))
+                        Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .submitScore(getString(R.string.leaderboard_leaderboard), 120000)
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_13))
+                        Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .submitScore(getString(R.string.leaderboard_leaderboard), 130000)
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_14))
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_15))
+                        Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .unlock(getString(R.string.achievement_level_16))
+                        Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .submitScore(getString(R.string.leaderboard_leaderboard), 140000)
+                        Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
+                            .submitScore(getString(R.string.leaderboard_leaderboard), 150000)
+                        /** Achievements Unlocked*/
                     }
                 }
             }
