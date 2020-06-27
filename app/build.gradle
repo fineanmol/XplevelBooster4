@@ -7,11 +7,11 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
     defaultConfig {
-        applicationId "xp.level.booster"
+        applicationId "xp.level.booster1"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 4
-        versionName "1.5"
+        versionCode 5
+        versionName "5.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "162015898921",
-    "firebase_url": "https://one-tap-xp-booster-16053843.firebaseio.com",
-    "project_id": "one-tap-xp-booster-16053843",
-    "storage_bucket": "one-tap-xp-booster-16053843.appspot.com"
+    "project_number": "260940551620",
+    "firebase_url": "https://xp-level-booster-1-85121383.firebaseio.com",
+    "project_id": "xp-level-booster-1-85121383",
+    "storage_bucket": "xp-level-booster-1-85121383.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:162015898921:android:6f36b3333862d372629b38",
+        "mobilesdk_app_id": "1:260940551620:android:3514248b4ac0fa6fc8c091",
         "android_client_info": {
-          "package_name": "xp.level.booster"
+          "package_name": "xp.level.booster1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "162015898921-728uum6q7psin8d8urin15bi9l01upi6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "xp.level.booster",
-            "certificate_hash": "13d839a53d34eb5c3b6b81af86d0e3fd39d48513"
-          }
-        },
-        {
-          "client_id": "162015898921-bqe53bisq4q974742on543nevvbr8q4c.apps.googleusercontent.com",
+          "client_id": "260940551620-mlo3f5qdhi95051l11pap69pqt0pc27o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBfTR0B7ruvhrBvgJd1qTpQWKWETopN8jo"
+          "current_key": "AIzaSyCW_cZZ2V20Yd1YCqNCYyk0lWz4JSGkEqA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "162015898921-bqe53bisq4q974742on543nevvbr8q4c.apps.googleusercontent.com",
+              "client_id": "260940551620-mlo3f5qdhi95051l11pap69pqt0pc27o.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
