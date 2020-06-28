@@ -33,7 +33,7 @@
             android:paddingStart="@dimen/spacing_standard_new"
             android:paddingEnd="@dimen/spacing_standard_new"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_level_logo" />
+            android:src="@drawable/ic_logo" />
 
         <!--<TextView
 
