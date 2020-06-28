@@ -7,7 +7,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
     defaultConfig {
-        applicationId "xp.level.booster2"
+        applicationId "xp.level.booster3"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 5
